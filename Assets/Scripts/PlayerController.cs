@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -43,5 +44,18 @@ public class PlayerController : MonoBehaviour
 
         // Aplicar el movimiento al CharacterController
         controller.Move(moveDirection);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        // He tocado algo (solo pasa 1 vez en el primer ciclo de fisicas) no en el primer frime (diferenciar entre el update y el ciclo de fisicas )
+        Destroy(other.gameObject);
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        // se activa mientras estas dentro de la entidad que estas en contacto
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        // Dejo de tocar algo   (es el ultimo ciclo de fisicas en la que etuvistes en contacto se va a ejecutar
     }
 }
