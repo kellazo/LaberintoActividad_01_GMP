@@ -26,15 +26,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal"); // A/D o Flechas Izq/Der
-        float vertical = Input.GetAxis("Vertical");     // W/S o Flechas Arriba/Abajo
+        float hInput = Input.GetAxis("Horizontal"); // A/D o Flechas Izq/Der  -1, 0, 1
+        float vInput = Input.GetAxis("Vertical");     // W/S o Flechas Arriba/Abajo -1, 0 , 1
 
         // Usamos Time.deltaTime para que la rotación no dependa del framerate.
-        transform.Rotate(0, horizontal * rotateSpeed * Time.deltaTime, 0);
+        transform.Rotate(0, hInput * rotateSpeed * Time.deltaTime, 0);
 
-        // Creamos un vector de movimiento local: hacia adelante lo que indica "vertical".
-        Vector3 moveDirection = new Vector3(0, 0, vertical);
-
+        // Creamos un vector de movimiento local: hacia adelante lo que indica "vertical" y normalizamos (vector unitario) para que la diagonal entre "dentro del círculo"
+        Vector3 moveDirection = new Vector3(hInput, 0, vInput).normalized;
+        // transform.Translate(moveDirection * moveSpeed * Time.deltaTime); //Manera en que lo ha dado en clase Fernando, es lo mismo que transform.position += moveDirection * moveSpeed * Time.deltaTime;
         // Transformar este vector local al espacio global teniendo en cuenta la rotación actual del personaje.
         moveDirection = transform.TransformDirection(moveDirection);
 
