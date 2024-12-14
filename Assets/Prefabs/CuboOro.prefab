@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1385336293914370967}
   m_Layer: 0
   m_Name: CuboOro
-  m_TagString: Untagged
+  m_TagString: CuboOro
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5663266230651596434}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25779545, y: 0.085830785, z: -0.022998432, w: 0.96210486}
+  m_LocalRotation: {x: 0.25779527, y: 0.0858317, z: -0.022998538, w: 0.9621048}
   m_LocalPosition: {x: 6.76, y: 1, z: 1.434}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -100,7 +100,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
