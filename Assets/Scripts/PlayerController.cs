@@ -26,7 +26,10 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   // getAxis tiene un impulso hasta llegar a 1 o -1 y GetAxisRaw es el absoluto.
+    {
+        // movimiento de un cuerpo de forma cinemática (sin fisicas)
+
+        // getAxis tiene un impulso hasta llegar a 1 o -1 y GetAxisRaw es el absoluto.
         float hInput = Input.GetAxis("Horizontal"); // A/D o Flechas Izq/Der  -1, 0, 1
         float vInput = Input.GetAxis("Vertical");     // W/S o Flechas Arriba/Abajo -1, 0 , 1
 
