@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  gravitySpeed: -9.81
   rotateSpeed: 120
 --- !u!33 &7775074336426490121
 MeshFilter:

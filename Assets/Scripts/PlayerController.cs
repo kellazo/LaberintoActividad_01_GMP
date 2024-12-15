@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -10,10 +9,11 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Factor multiplicador para la velocidad de movimiento hacia adelante/atrás.")]
     [SerializeField] private float moveSpeed; //= 3.0f;
     [Tooltip("Factor multiplicador para la gravedad de movimiento hacia abajo (y)")]
-    [SerializeField] private float gravitySpeed; //= 3.0f;
+    [SerializeField] private float gravitySpeed; //= -9.81f;
     [Tooltip("Factor multiplicador para la velocidad de rotación (giro) Grados por segundo.")]
     [SerializeField] private float rotateSpeed; //= 120.0f; // grados por segundo
-    private Vector3 movimientoVertical;
+    //private Vector3 movimientoVertical;
+    private float velocidadVertical;
 
     // Referencia al CharacterController
     private CharacterController controller;
@@ -35,22 +35,38 @@ public class PlayerController : MonoBehaviour
         float hInput = Input.GetAxisRaw("Horizontal"); // A/D o Flechas Izq/Der  -1, 0, 1
         float vInput = Input.GetAxisRaw("Vertical");     // W/S o Flechas Arriba/Abajo -1, 0 , 1
 
-        // Usamos Time.deltaTime para que la rotación no dependa del framerate.
-        //transform.Rotate(0, hInput * rotateSpeed * Time.deltaTime, 0);
+        // Usamos Time.deltaTime para que la rotación no dependa del framerate. Y rotamos al personaje en el eje Y
+        transform.Rotate(0, hInput * rotateSpeed * Time.deltaTime, 0);
 
         // Creamos un vector de movimiento local: hacia adelante lo que indica "vertical" y normalizamos (vector unitario) para que la diagonal entre "dentro del círculo"
-        Vector3 moveDirection = new Vector3(hInput, 0, vInput).normalized;
+        //Vector3 moveDirection = new Vector3(hInput, 0, vInput).normalized;
+        // Crear vector de movimiento local hacia adelante/atrás según vInput
+        Vector3 moveDirection = new Vector3(0, 0, vInput).normalized;
         // transform.Translate(moveDirection * moveSpeed * Time.deltaTime); //Manera en que lo ha dado en clase Fernando, es lo mismo que transform.position += moveDirection * moveSpeed * Time.deltaTime;
         // Transformar este vector local al espacio global teniendo en cuenta la rotación actual del personaje.
-       // moveDirection = transform.TransformDirection(moveDirection);
+        moveDirection = transform.TransformDirection(moveDirection);
 
         // Multiplicamos por la velocidad de movimiento y por deltaTime para que el desplazamiento sea consistente.
-        moveDirection = moveDirection * moveSpeed * Time.deltaTime;
-
+        moveDirection *= moveSpeed * Time.deltaTime;
+        //moveDirection *= moveSpeed; //* Time.deltaTime;
+        if(controller.isGrounded)
+        {
+            velocidadVertical = 0f; 
+        }
+        else
+        {
+            velocidadVertical += gravitySpeed * Time.deltaTime;
+        }
+        // Mover al personaje sumando el movimiento horizontal (avances/rotaciones) y la velocidad vertical (gravedad)
+        //Vector3 finalMove = (moveDirection + movimientoVertical) * Time.deltaTime;
         // Aplicar el movimiento al CharacterController
-        controller.Move(moveDirection);
+        //controller.Move(moveDirection);
 
-        AplicarGravedad();
+        // Añadir el componente vertical al movimiento final(convertido a vector)
+        Vector3 finalMove = new Vector3(moveDirection.x, velocidadVertical * Time.deltaTime, moveDirection.z);
+        controller.Move(finalMove);
+
+        //AplicarGravedad();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -69,8 +85,8 @@ public class PlayerController : MonoBehaviour
         // Dejo de tocar algo   (es el ultimo ciclo de fisicas en la que etuvistes en contacto se va a ejecutar
     }
     private void AplicarGravedad()
-    {
-        movimientoVertical.y += gravitySpeed * Time.deltaTime; // es como el impulso del salto.
-        controller.Move(movimientoVertical *  Time.deltaTime); // hay dos time delta time porque la aceleracion es metros / por segundos al cuadrado
+    {        
+        //movimientoVertical.y += gravitySpeed * Time.deltaTime; // es como el impulso del salto.
+        //controller.Move(movimientoVertical * Time.deltaTime); // hay dos time delta time porque la aceleracion es metros / por segundos al cuadrado
     }
 }
