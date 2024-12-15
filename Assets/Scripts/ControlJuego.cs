@@ -29,6 +29,8 @@ public class ControlJuego : MonoBehaviour
     private List<Vector3> cubosPositions = new List<Vector3>();
     private List<Quaternion> cubosRotations = new List<Quaternion>();
 
+    [SerializeField] private AudioSource gameAudioSource;
+    [SerializeField] private AudioClip victoryClip;
 
 
     void Awake()
@@ -161,6 +163,12 @@ public class ControlJuego : MonoBehaviour
         if (pc != null)
         {
             pc.enabled = false;
+        }
+
+        // Reproducir sonido de victoria
+        if (gameAudioSource != null && victoryClip != null)
+        {
+            gameAudioSource.PlayOneShot(victoryClip);
         }
     }
 

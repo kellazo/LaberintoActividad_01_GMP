@@ -99,6 +99,18 @@ public class PlayerController : MonoBehaviour
         finalMove.y = velocidadVertical * Time.deltaTime;
 
         controller.Move(finalMove);
+
+        if (vInput != 0 && footstepSource.isPlaying == false)
+        {
+            footstepSource.clip = footstepClip;
+            footstepSource.loop = true;
+            footstepSource.Play();
+        }
+        else if (vInput == 0 && footstepSource.isPlaying)
+        {
+            footstepSource.Stop();
+        }
+
         // Mover al personaje sumando el movimiento horizontal (avances/rotaciones) y la velocidad vertical (gravedad)
         //Vector3 finalMove = (moveDirection + movimientoVertical) * Time.deltaTime;
         // Aplicar el movimiento al CharacterController
