@@ -1712,7 +1712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f231b93a53ad44ea293b0401cf6461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalCubos: 1
+  totalCubos: 10
   textoMensaje: {fileID: 1394848746}
   textoTiempo: {fileID: 780650550}
   textoReiniciar: {fileID: 2024135080}
