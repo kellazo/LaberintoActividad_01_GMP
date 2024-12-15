@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     // Timer para el impulso
     private float boostTimer = 0f;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip boostClip;
+
     //[SerializeField] private TMPro.TextMeshProUGUI CubosConteo; // Referencia al Texto que muestra el conteo de cubos
     //[SerializeField] private TMPro.TextMeshProUGUI TextoVictoria;   // Referencia al Texto que muestra el mensaje de victoria
 
@@ -77,6 +80,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             boostTimer = boostDuration;
+            // Reproducir el sonido del impulso si tienes el audioSource y el boostClip asignados
+            if (audioSource != null && boostClip != null)
+            {
+                audioSource.PlayOneShot(boostClip);
+            }
         }
 
         if (controller.isGrounded)
@@ -157,5 +165,12 @@ public class PlayerController : MonoBehaviour
     {
         //movimientoVertical.y += gravitySpeed * Time.deltaTime; // es como el impulso del salto.
         //controller.Move(movimientoVertical * Time.deltaTime); // hay dos time delta time porque la aceleracion es metros / por segundos al cuadrado
+    }
+    public void StopFootsteps()
+    {
+        if (footstepSource != null && footstepSource.isPlaying)
+        {
+            footstepSource.Stop();
+        }
     }
 }

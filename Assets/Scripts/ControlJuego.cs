@@ -162,6 +162,7 @@ public class ControlJuego : MonoBehaviour
         PlayerController pc = jugador.GetComponent<PlayerController>();
         if (pc != null)
         {
+            pc.StopFootsteps(); // Detiene el sonido de pasos antes de deshabilitar
             pc.enabled = false;
         }
 
