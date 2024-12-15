@@ -12,11 +12,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravitySpeed; //= -9.81f;
     [Tooltip("Factor multiplicador para la velocidad de rotación (giro) Grados por segundo.")]
     [SerializeField] private float rotateSpeed; //= 120.0f; // grados por segundo
-    //private Vector3 movimientoVertical;
-   // [Tooltip("Número total de cubos.")]
-    //[SerializeField] private int cubosTotales;
-   // private int cubosRecogidos;
+                                                //private Vector3 movimientoVertical;
+                                                // [Tooltip("Número total de cubos.")]
+                                                //[SerializeField] private int cubosTotales;
+                                                // private int cubosRecogidos;
     private float velocidadVertical;
+
+    [Tooltip("Velocidad extra que se añade durante el impulso.")]
+    [SerializeField] private float boostSpeed = 10.0f;
+    [Tooltip("Duración del impulso en segundos.")]
+    [SerializeField] private float boostDuration = 0.5f;
+    // Timer para el impulso
+    private float boostTimer = 0f;
 
     //[SerializeField] private TMPro.TextMeshProUGUI CubosConteo; // Referencia al Texto que muestra el conteo de cubos
     //[SerializeField] private TMPro.TextMeshProUGUI TextoVictoria;   // Referencia al Texto que muestra el mensaje de victoria
@@ -59,24 +66,50 @@ public class PlayerController : MonoBehaviour
         moveDirection = transform.TransformDirection(moveDirection);
 
         // Multiplicamos por la velocidad de movimiento y por deltaTime para que el desplazamiento sea consistente.
-        moveDirection *= moveSpeed * Time.deltaTime;
+        //moveDirection *= moveSpeed * Time.deltaTime;
         //moveDirection *= moveSpeed; //* Time.deltaTime;
-        if(controller.isGrounded)
+
+        // Actualizar boostTimer
+        if (boostTimer > 0)
         {
-            velocidadVertical = 0f; 
+            boostTimer -= Time.deltaTime;
+        }
+
+        // Detectar pulsación de espacio para el impulso
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            boostTimer = boostDuration;
+        }
+
+        if (controller.isGrounded)
+        {
+            velocidadVertical = 0f;
         }
         else
         {
             velocidadVertical += gravitySpeed * Time.deltaTime;
         }
+
+        // Añadir velocidad base
+        float currentSpeed = moveSpeed;
+        // Si hay impulso activo, añadir boostSpeed
+        if (boostTimer > 0)
+        {
+            currentSpeed += boostSpeed;
+        }
+        Vector3 finalMove = moveDirection * currentSpeed * Time.deltaTime;
+        finalMove.y = velocidadVertical * Time.deltaTime;
+
+        controller.Move(finalMove);
         // Mover al personaje sumando el movimiento horizontal (avances/rotaciones) y la velocidad vertical (gravedad)
         //Vector3 finalMove = (moveDirection + movimientoVertical) * Time.deltaTime;
         // Aplicar el movimiento al CharacterController
         //controller.Move(moveDirection);
 
         // Añadir el componente vertical al movimiento final(convertido a vector)
-        Vector3 finalMove = new Vector3(moveDirection.x, velocidadVertical * Time.deltaTime, moveDirection.z);
-        controller.Move(finalMove);
+        //Vector3 finalMove = new Vector3(moveDirection.x, velocidadVertical * Time.deltaTime, moveDirection.z);
+
+        //controller.Move(finalMove);
 
         //AplicarGravedad();
     }
@@ -111,27 +144,8 @@ public class PlayerController : MonoBehaviour
         // Dejo de tocar algo   (es el ultimo ciclo de fisicas en la que etuvistes en contacto se va a ejecutar
     }
     private void AplicarGravedad()
-    {        
+    {
         //movimientoVertical.y += gravitySpeed * Time.deltaTime; // es como el impulso del salto.
         //controller.Move(movimientoVertical * Time.deltaTime); // hay dos time delta time porque la aceleracion es metros / por segundos al cuadrado
     }
-
-    /*private void UpdateCubesText()
-    {
-        if (CubosConteo != null)
-        {
-            CubosConteo.text = "Cubos: " + cubosRecogidos.ToString() + " / " + cubosTotales.ToString();
-        }
-    }
-
-    private void GanarPartida()
-    {
-        // Mostrar mensaje de victoria
-        if (TextoVictoria != null)
-        {
-            TextoVictoria.gameObject.SetActive(true);
-            TextoVictoria.text = "¡Has ganado! Has recogido todos los cubos y salido del laberinto.";
-        }
-        // falta parar tiempo y deshabilitar movimiento jugador o pulsar espacio para reiniciar.
-    }*/
 }

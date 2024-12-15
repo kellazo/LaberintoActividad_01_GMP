@@ -48,7 +48,7 @@ public class ControlJuego : MonoBehaviour
             cubosRotations.Add(t.rotation);
         }
         // Instanciamos los cubos al inicio
-        InstanciarCubos();
+        //InstanciarCubos();
 
         inicioJuego = DateTime.Now;
         ActualizarMensaje();
@@ -121,6 +121,11 @@ public class ControlJuego : MonoBehaviour
             juegoTerminado = true;
             MostrarVictoria();
         }
+        else
+        {
+            // Si el jugador está en la salida pero no ha recogido todos los cubos:
+            textoMensaje.text = "Aún te faltan cubos por recoger. ¡Sigue buscando!";
+        }
     }
 
     private void ActualizarMensaje()
@@ -191,12 +196,25 @@ public class ControlJuego : MonoBehaviour
 
         // Colocar al jugador en la posición inicial
         // Mover al jugador a la posición inicial
+        CharacterController cc = jugador.GetComponent<CharacterController>();
+        PlayerController pc = jugador.GetComponent<PlayerController>();
+        // Desactivar PlayerController y CharacterController temporalmente
+        // para mover el jugador sin que interfieran.
+        if (pc != null)
+            pc.enabled = false;
+        if (cc != null)
+            cc.enabled = false;
+
+        // Mover al jugador a la posición inicial
         jugador.transform.position = posicionInicialJugador;
         jugador.transform.rotation = Quaternion.identity;
-        PlayerController pc = jugador.GetComponent<PlayerController>();
+
+        // Volver a activar CharacterController y PlayerController
+        if (cc != null)
+            cc.enabled = true;
         if (pc != null)
             pc.enabled = true;
-
+       
         // Destruir e instanciar de nuevo los cubos
         DestruirCubos();
         InstanciarCubos();
