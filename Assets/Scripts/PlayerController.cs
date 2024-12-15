@@ -12,10 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravitySpeed; //= -9.81f;
     [Tooltip("Factor multiplicador para la velocidad de rotación (giro) Grados por segundo.")]
     [SerializeField] private float rotateSpeed; //= 120.0f; // grados por segundo
-                                                //private Vector3 movimientoVertical;
-                                                // [Tooltip("Número total de cubos.")]
-                                                //[SerializeField] private int cubosTotales;
-                                                // private int cubosRecogidos;
+    [SerializeField] private AudioSource footstepSource;
+    [SerializeField] private AudioClip footstepClip;
     private float velocidadVertical;
 
     [Tooltip("Velocidad extra que se añade durante el impulso.")]
