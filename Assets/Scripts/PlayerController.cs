@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rotateSpeed; //= 120.0f; // grados por segundo
     [SerializeField] private AudioSource footstepSource;
     [SerializeField] private AudioClip footstepClip;
+    [SerializeField] private AudioSource pickUpSource;
+    [SerializeField] private AudioClip pickUpClip;
     private float velocidadVertical;
 
     [Tooltip("Velocidad extra que se añade durante el impulso.")]
@@ -141,6 +143,12 @@ public class PlayerController : MonoBehaviour
             //UpdateCubesText();
             // Notificar a ControlJuego que se ha recogido un cubo
             FindObjectOfType<ControlJuego>().CapturaCubo();
+
+            // Reproducir el sonido de recogida de cubo
+            if (pickUpSource != null && pickUpClip != null)
+            {
+                pickUpSource.PlayOneShot(pickUpClip);
+            }
         }
 
         if (other.gameObject.CompareTag("SalidaFinal"))
