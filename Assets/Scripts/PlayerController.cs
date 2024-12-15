@@ -13,13 +13,13 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Factor multiplicador para la velocidad de rotación (giro) Grados por segundo.")]
     [SerializeField] private float rotateSpeed; //= 120.0f; // grados por segundo
     //private Vector3 movimientoVertical;
-    [Tooltip("Número total de cubos.")]
-    [SerializeField] private int cubosTotales;
-    private int cubosRecogidos;
+   // [Tooltip("Número total de cubos.")]
+    //[SerializeField] private int cubosTotales;
+   // private int cubosRecogidos;
     private float velocidadVertical;
 
-    [SerializeField] private TMPro.TextMeshProUGUI CubosConteo; // Referencia al Texto que muestra el conteo de cubos
-    [SerializeField] private TMPro.TextMeshProUGUI TextoVictoria;   // Referencia al Texto que muestra el mensaje de victoria
+    //[SerializeField] private TMPro.TextMeshProUGUI CubosConteo; // Referencia al Texto que muestra el conteo de cubos
+    //[SerializeField] private TMPro.TextMeshProUGUI TextoVictoria;   // Referencia al Texto que muestra el mensaje de victoria
 
     // Referencia al CharacterController
     private CharacterController controller;
@@ -32,10 +32,10 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
 
         // Inicializar el texto
-        UpdateCubesText();
+        //UpdateCubesText();
         // Asegurarnos que el texto de victoria esté vacío o desactivado al inicio
-        if (TextoVictoria != null)
-            TextoVictoria.gameObject.SetActive(false);
+        //if (TextoVictoria != null)
+        //    TextoVictoria.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -86,17 +86,20 @@ public class PlayerController : MonoBehaviour
         {
             // He tocado algo (solo pasa 1 vez en el primer ciclo de fisicas) no en el primer frime (diferenciar entre el update y el ciclo de fisicas )
             Destroy(other.gameObject);
-            cubosRecogidos++;
-            UpdateCubesText();
+            //cubosRecogidos++;
+            //UpdateCubesText();
+            // Notificar a ControlJuego que se ha recogido un cubo
+            FindObjectOfType<ControlJuego>().CapturaCubo();
         }
 
         if (other.gameObject.CompareTag("SalidaFinal"))
         {
             // Comprobar si hemos recogido todos los cubos
-            if (cubosRecogidos >= cubosTotales)
+            /*if (cubosRecogidos >= cubosTotales)
             {
                 GanarPartida();
-            }
+            }*/
+            FindObjectOfType<ControlJuego>().CheckVictoria();
         }
     }
     private void OnTriggerStay(Collider other)
@@ -113,7 +116,7 @@ public class PlayerController : MonoBehaviour
         //controller.Move(movimientoVertical * Time.deltaTime); // hay dos time delta time porque la aceleracion es metros / por segundos al cuadrado
     }
 
-    private void UpdateCubesText()
+    /*private void UpdateCubesText()
     {
         if (CubosConteo != null)
         {
@@ -130,5 +133,5 @@ public class PlayerController : MonoBehaviour
             TextoVictoria.text = "¡Has ganado! Has recogido todos los cubos y salido del laberinto.";
         }
         // falta parar tiempo y deshabilitar movimiento jugador o pulsar espacio para reiniciar.
-    }
+    }*/
 }

@@ -52,6 +52,9 @@ MonoBehaviour:
   moveSpeed: 3
   gravitySpeed: -9.81
   rotateSpeed: 120
+  cubosTotales: 6
+  CubosConteo: {fileID: 0}
+  TextoVictoria: {fileID: 0}
 --- !u!33 &7775074336426490121
 MeshFilter:
   m_ObjectHideFlags: 0

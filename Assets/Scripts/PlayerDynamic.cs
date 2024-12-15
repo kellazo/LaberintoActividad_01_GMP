@@ -61,7 +61,7 @@ public class PlayerDynamic : MonoBehaviour
     {
         if(other.gameObject.CompareTag("CuboOro"))
         {
-            Destroy(other.gameObject);
+           // Destroy(other.gameObject);
         }
     }
 }
