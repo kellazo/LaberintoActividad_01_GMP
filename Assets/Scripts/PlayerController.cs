@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip footstepClip;
     [SerializeField] private AudioSource pickUpSource;
     [SerializeField] private AudioClip pickUpClip;
+    [Tooltip("Distancia detección del raycast hit")]
+    [SerializeField] private float distanciaDeteccionInteractuable;
     private float velocidadVertical;
 
     [Tooltip("Velocidad extra que se añade durante el impulso.")]
@@ -88,6 +91,23 @@ public class PlayerController : MonoBehaviour
                 audioSource.PlayOneShot(boostClip);
             }
         }
+
+        //Si doy a la e...
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            // lanzo un raycast
+            if (Physics.Raycast(this.transform.position, transform.forward, out RaycastHit hit, distanciaDeteccionInteractuable))
+            {
+                // si impacto en el botón
+                if (hit.transform.TryGetComponent(out Boton boton))
+                {
+                    // interactua con el botón
+                    boton.Interactuar();
+                }
+            }
+        }
+
+
 
         if (controller.isGrounded)
         {
