@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject optionsMenuPanel;
+    
+    // Se ejecuta cuando clicquemos el boton de opciones
+    public void OnOptionsButtonClicked()
     {
-        
-    }
+        //ocultar mainmenupanel i mostrar optionsmenupanel:
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        mainMenuPanel.SetActive(false);
+        optionsMenuPanel.SetActive(true);
     }
 }
