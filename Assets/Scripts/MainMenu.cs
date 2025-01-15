@@ -15,4 +15,13 @@ public class MainMenu : MonoBehaviour
         mainMenuPanel.SetActive(false);
         optionsMenuPanel.SetActive(true);
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            mainMenuPanel.SetActive(false);
+            optionsMenuPanel.SetActive(true);
+        }
+    }
 }
