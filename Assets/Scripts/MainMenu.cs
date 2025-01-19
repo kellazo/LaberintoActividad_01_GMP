@@ -1,15 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private AudioMixer mainMixer; 
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject optionsMenuPanel;
-    
+    [SerializeField] private TMP_Dropdown resolutionsDropodown;
+
+
+    private Resolution[] resolutions; // Resoluciones disponibles en mi pantalla.
+
+    private List<string> resolutionsOptions = new List<string>();
+    private void Start()
+    {
+        InitResolutionDropdown();
+    }
+
+    private void InitResolutionDropdown()
+    {
+        resolutions = Screen.resolutions;
+
+        foreach (var resolution in resolutions)
+        {
+            resolutionsOptions.Add(resolution.width + "x" + resolution.height);
+        }
+        resolutionsDropodown.AddOptions(resolutionsOptions);
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))

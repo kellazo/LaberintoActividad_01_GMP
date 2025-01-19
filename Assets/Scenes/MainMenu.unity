@@ -5375,6 +5375,7 @@ MonoBehaviour:
   mainMixer: {fileID: 24100000, guid: a5bd9582803ece845874c2fb5f840d51, type: 2}
   mainMenuPanel: {fileID: 1392157925}
   optionsMenuPanel: {fileID: 1991534669}
+  resolutionsDropodown: {fileID: 0}
 --- !u!224 &1876487256
 RectTransform:
   m_ObjectHideFlags: 0
