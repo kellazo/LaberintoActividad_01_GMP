@@ -78,6 +78,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnQuitButtonClicked()
     {
+        Debug.Log("Juego Cerrado.");
         Application.Quit();
     }
 
