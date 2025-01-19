@@ -40,4 +40,9 @@ public class MainMenu : MonoBehaviour
     {
         Screen.fullScreen = isFullScreen;
     }
+
+    public void SetNewQualityLevel(int  qualityIndex)
+    {
+        QualitySettings.SetQualityLevel(qualityIndex);
+    }
 }
