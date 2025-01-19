@@ -76,6 +76,11 @@ public class MainMenu : MonoBehaviour
         optionsMenuPanel.SetActive(true);
     }
 
+    public void OnQuitButtonClicked()
+    {
+        Application.Quit();
+    }
+
     public void SetNewVolumeToMusic(float volume)
     {
         mainMixer.SetFloat("musicVolume", volume);
