@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private AudioMixer mainMixer; 
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject optionsMenuPanel;
+    [SerializeField] private TMP_Dropdown qualityDropodown;
     [SerializeField] private TMP_Dropdown resolutionsDropodown;
 
 
@@ -20,6 +21,14 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         InitResolutionDropdown();
+        // Inicializar el dropdown con el valor por defecto de nivel de calidad
+        qualityDropodown.value = QualitySettings.GetQualityLevel();
+        qualityDropodown.RefreshShownValue(); // Refresco los valores.
+
+        resolutionsDropodown.value = GetDefaultResolution();
+        resolutionsDropodown.RefreshShownValue();
+
+
     }
 
     private void InitResolutionDropdown()
@@ -33,6 +42,18 @@ public class MainMenu : MonoBehaviour
         resolutionsDropodown.AddOptions(resolutionsOptions);
     }
 
+    private int GetDefaultResolution()
+    {
+        for(int i = 0; i < resolutions.Length; i++)
+        {
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            {
+                return i;
+            }
+        }
+        return 0;
+
+    }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -73,5 +94,11 @@ public class MainMenu : MonoBehaviour
     public void SetNewQualityLevel(int  qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
+    }
+
+    public void SetNewResolution(int resolutionIndex)
+    {
+        Resolution chosenResolution = resolutions[resolutionIndex];
+        Screen.SetResolution(chosenResolution.width, chosenResolution.height, Screen.fullScreen);
     }
 }
