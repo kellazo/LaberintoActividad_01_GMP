@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class ZonaTrampa : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameManagerSO gM; //manegador de eventos
+    [SerializeField] private int id;
+    [SerializeField] private float velocity;
+
+
+    public void CambiarEstado()
     {
+        gM.EventoArea(id);
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        if (other.transform.TryGetComponent(out PlayerController player))
+        {
+            CambiarEstado();
+        }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.TryGetComponent(out PlayerController player))
+        {
+            CambiarEstado();
+        }
+    }
+
 }
