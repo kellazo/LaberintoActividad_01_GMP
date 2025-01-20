@@ -13,4 +13,10 @@ public class GameManagerSO : ScriptableObject
         //como lanzo el evento?
         OnBotonPulsado?.Invoke(idBoton); // lanzar de un evento de que un boton ha sido pulsado. //para que el otro objeto se entere que se tiene que subscribir
     }
+    public event Action<int> OnAreaEntrada;
+    public void EventoArea(int idBoton)
+    {
+        //como lanzo el evento?
+        OnAreaEntrada?.Invoke(idBoton);
+    }
 }

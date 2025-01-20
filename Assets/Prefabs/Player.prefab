@@ -59,6 +59,7 @@ MonoBehaviour:
   footstepClip: {fileID: 8300000, guid: 37dad55447ede5d4fae4564700724eee, type: 3}
   pickUpSource: {fileID: 8735736456379189565}
   pickUpClip: {fileID: 8300000, guid: 2bcb45ac2fae1bd4abef0aa547dd9508, type: 3}
+  distanciaDeteccionInteractuable: 0
   boostSpeed: 10
   boostDuration: 0.5
   audioSource: {fileID: 8735736456379189565}
@@ -175,7 +176,8 @@ AudioSource:
   m_GameObject: {fileID: 5141004566935958970}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2839609295991491432, guid: a5bd9582803ece845874c2fb5f840d51,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 37dad55447ede5d4fae4564700724eee, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -222,7 +224,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -271,7 +273,8 @@ AudioSource:
   m_GameObject: {fileID: 5141004566935958970}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2839609295991491432, guid: a5bd9582803ece845874c2fb5f840d51,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 5c2c9097f72a6524497c0d19fac350c9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -318,7 +321,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -367,7 +370,8 @@ AudioSource:
   m_GameObject: {fileID: 5141004566935958970}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2839609295991491432, guid: a5bd9582803ece845874c2fb5f840d51,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 2bcb45ac2fae1bd4abef0aa547dd9508, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -414,7 +418,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
