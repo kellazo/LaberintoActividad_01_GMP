@@ -15,11 +15,16 @@ public class ZonaTrampa : MonoBehaviour
         
     }
 
+    public void SalirEstado()
+    {
+        gM.EventoAreaSalida(id);
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.transform.TryGetComponent(out PlayerController player))
         {
-            CambiarEstado();
+            SalirEstado();
         }
     }
 

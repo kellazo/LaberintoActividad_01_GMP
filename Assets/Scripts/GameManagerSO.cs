@@ -19,4 +19,10 @@ public class GameManagerSO : ScriptableObject
         //como lanzo el evento?
         OnAreaEntrada?.Invoke(idBoton);
     }
+    public event Action<int> OnAreaSalida;
+    public void EventoAreaSalida(int idBoton)
+    {
+        //como lanzo el evento?
+        OnAreaSalida?.Invoke(idBoton);
+    }
 }
