@@ -12,6 +12,8 @@ public class Patrullar : MonoBehaviour
     private NavMeshAgent agent;
     private int indicePuntoActual = 0; // marca el indice de la lista
     private Vector3 destinoActual; // Marca coordenada mi destino actual
+    [SerializeField]
+    private float tiempoDeEspera; // se puede randomizar para que sea mas organico (tiempo de espera entre punto y punto)
     private void Awake()
     {
         foreach (Transform punto in ruta)
@@ -32,9 +34,10 @@ public class Patrullar : MonoBehaviour
         while (true)
         {
             // ir a un punto en concreto y esperare x tiempo y yre a otro punto
-            agent.SetDestination(destinoActual);
-            // yield return new WaitUntil(HeLlegado); // Esperate hasta que hayas llegado
-            yield return new WaitUntil(() => agent.remainingDistance <= 0.2f); // expresion lambda, te ahorras lo comentado de abajo. funcion anonima
+            agent.SetDestination(destinoActual); // voy yendo al destino 
+            // yield return new WaitUntil(HeLlegado); // Esperate en este punto hasta que hayas llegado
+            yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance <= 0.2f); // expresion lambda, te ahorras lo comentado de abajo. funcion anonima. | me espero  en este punto hasta que llegue. Tambien mira que no tenga calculos pendientes, ya qu eel navmesh el calculo es complejo y le cuesta.
+            yield return new WaitForSeconds(tiempoDeEspera); // me espero en dicho punto.  
             CalcularNuevoDestino();
         }
     }
