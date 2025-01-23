@@ -29,11 +29,14 @@ public class Patrullar : MonoBehaviour
     }
     private IEnumerator PatrullarYEsperar()
     {
-        // ir a un punto en concreto y esperare x tiempo y yre a otro punto
-        agent.SetDestination(destinoActual);
-        // yield return new WaitUntil(HeLlegado); // Esperate hasta que hayas llegado
-        yield return new WaitUntil(() => agent.remainingDistance <= 0.2f); // expresion lambda, te ahorras lo comentado de abajo. funcion anonima
-        CalcularNuevoDestino();
+        while (true)
+        {
+            // ir a un punto en concreto y esperare x tiempo y yre a otro punto
+            agent.SetDestination(destinoActual);
+            // yield return new WaitUntil(HeLlegado); // Esperate hasta que hayas llegado
+            yield return new WaitUntil(() => agent.remainingDistance <= 0.2f); // expresion lambda, te ahorras lo comentado de abajo. funcion anonima
+            CalcularNuevoDestino();
+        }
     }
    // private bool HeLlegado()
    // {
