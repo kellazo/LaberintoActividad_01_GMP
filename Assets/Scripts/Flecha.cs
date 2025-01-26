@@ -6,14 +6,17 @@ public class Flecha : MonoBehaviour
 {
     [SerializeField] private GameManagerSO gM; //manegador de eventos
     [SerializeField] private int id;
-
-
-    [Header("Dirección")]
-    [SerializeField] private bool invertDirection = false;
-
-
+    [SerializeField] private float speed = 10f;
     private bool activar; // Controla si la trampa se mueve
 
+    // Distancia máxima que recorrerá la flecha antes de pararse
+    [SerializeField] private float maxDistance = 10f;
+
+    private Vector3 startPosition;   // Posición inicial cuando se activó
+
+    // Para guardar la posición y rotación originales
+    private Vector3 originalPos;
+    private Quaternion originalRot;
 
     //para subscribirse se ejecuta despues del awake y antes del start
     private void OnEnable()
@@ -24,7 +27,9 @@ public class Flecha : MonoBehaviour
 
     private void Start()
     {
-        
+        // Guardamos la posición y rotación originales de la flecha
+        originalPos = transform.position;
+        originalRot = transform.rotation;
     }
     // Cuando el player salga de la zona
     private void Desactivar(int id)
@@ -33,6 +38,9 @@ public class Flecha : MonoBehaviour
         {
 
             activar = false;
+            // La devolvemos inmediatamente a su posición y rotación original
+            transform.position = originalPos;
+            transform.rotation = originalRot;
 
         }
     }
@@ -42,6 +50,8 @@ public class Flecha : MonoBehaviour
         if (this.id == id)
         {
             activar = true;
+            // Guardar la posición inicial
+            startPosition = transform.position;
         }
     }
 
@@ -51,7 +61,14 @@ public class Flecha : MonoBehaviour
         // Si está activa la trampa, hacemos la oscilación
         if (activar)
         {
-           
+            transform.Translate(Vector3.up * speed * Time.deltaTime, Space.Self);
+            // Medir la distancia recorrida
+            float distanciaRecorrida = Vector3.Distance(transform.position, startPosition);
+            // Si superó la distancia máxima, la paramos
+            if (distanciaRecorrida >= maxDistance)
+            {
+                activar = false; 
+            }
         }
     }
 
@@ -68,7 +85,6 @@ public class Flecha : MonoBehaviour
         // Cuando el Player entre en el trigger del hacha
         if (activar && other.CompareTag("Player"))
         {
-
             // Buscamos su PlayerController para llamar a TakeDamage
             PlayerController playerController = other.GetComponent<PlayerController>();
             if (playerController != null)

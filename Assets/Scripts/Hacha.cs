@@ -73,7 +73,7 @@ public class Hacha : MonoBehaviour
         gM.OnAreaSalida -= Desactivar;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         // Cuando el Player entre en el trigger del hacha
         if (activar && other.CompareTag("Player"))
