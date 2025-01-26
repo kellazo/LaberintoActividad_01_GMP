@@ -12693,6 +12693,7 @@ GameObject:
   - component: {fileID: 1188826301}
   - component: {fileID: 1188826300}
   - component: {fileID: 1188826299}
+  - component: {fileID: 1188826303}
   m_Layer: 0
   m_Name: ZonaHachas
   m_TagString: Untagged
@@ -12786,6 +12787,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1188826303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188826298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f98bab4219f74448071abb77bc7735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gM: {fileID: 11400000, guid: 69d759c82f09b1142bd9382f7b76a456, type: 2}
+  id: 2
+  velocity: 10
 --- !u!43 &1212590096
 Mesh:
   m_ObjectHideFlags: 0
@@ -19148,6 +19164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1561129671}
   - component: {fileID: 1561129672}
+  - component: {fileID: 1561129673}
   m_Layer: 0
   m_Name: Hacha
   m_TagString: Untagged
@@ -19163,8 +19180,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1561129670}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.018070718, y: -0, z: -0, w: 0.99983674}
-  m_LocalPosition: {x: 12.207, y: 3.34, z: 20.93}
+  m_LocalRotation: {x: -0.011611722, y: -0, z: -0, w: 0.9999326}
+  m_LocalPosition: {x: 15.65, y: 3.34, z: 20.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19172,7 +19189,7 @@ Transform:
   - {fileID: 750737470}
   - {fileID: 408583995}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -2.071, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -1.331, y: 0, z: 0}
 --- !u!65 &1561129672
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19194,6 +19211,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.24678707, y: 0.8304155, z: 1.2747335}
   m_Center: {x: -0.07093859, y: -1.7404824, z: -0.063170195}
+--- !u!114 &1561129673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561129670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7868133cc52b6e44cb2f9c6682f23d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gM: {fileID: 11400000, guid: 69d759c82f09b1142bd9382f7b76a456, type: 2}
+  id: 2
+  amplitude: 45
+  speed: 2
+  invertDirection: 1
 --- !u!1 &1575480217
 GameObject:
   m_ObjectHideFlags: 0
@@ -44547,17 +44581,17 @@ PrefabInstance:
     - target: {fileID: 1857169851531800151, guid: 0523bae21b4fed34da3768b94867cab5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.13000011
+      value: 21.04
       objectReference: {fileID: 0}
     - target: {fileID: 1857169851531800151, guid: 0523bae21b4fed34da3768b94867cab5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.72
+      value: 2.38
       objectReference: {fileID: 0}
     - target: {fileID: 1857169851531800151, guid: 0523bae21b4fed34da3768b94867cab5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.9
+      value: 16.34
       objectReference: {fileID: 0}
     - target: {fileID: 1857169851531800151, guid: 0523bae21b4fed34da3768b94867cab5,
         type: 3}

@@ -89,7 +89,9 @@ public class Pinchos : MonoBehaviour
     //para desuscribirse se ejecuta antes del destroy/disable
     private void OnDisable()
     {
+        // Importante desuscribirse para evitar errores
         gM.OnAreaEntrada -= Activar;
+        gM.OnAreaSalida -= Desactivar;
     }
 }
 
