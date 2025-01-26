@@ -6,6 +6,7 @@ using static UnityEngine.Rendering.DebugUI;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+
     // Velocidad de avance y giro. Ajustables desde el Inspector.
     [Tooltip("Factor multiplicador para la velocidad de movimiento hacia adelante/atrás.")]
     [SerializeField] private float moveSpeed; //= 3.0f;
@@ -34,6 +35,13 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] private TMPro.TextMeshProUGUI CubosConteo; // Referencia al Texto que muestra el conteo de cubos
     //[SerializeField] private TMPro.TextMeshProUGUI TextoVictoria;   // Referencia al Texto que muestra el mensaje de victoria
 
+    [Header("Salud del jugador")]
+    [SerializeField] private float maxHealth = 100f;
+    private float currentHealth;
+
+    [Tooltip("Referencia al CanvasManager (para actualizar la barra de vida).")]
+    [SerializeField] private CanvasManager canvasManager;
+
     // Referencia al CharacterController
     private CharacterController controller;
 
@@ -49,6 +57,12 @@ public class PlayerController : MonoBehaviour
         // Asegurarnos que el texto de victoria esté vacío o desactivado al inicio
         //if (TextoVictoria != null)
         //    TextoVictoria.gameObject.SetActive(false);
+
+        // Iniciar salud al máximo
+        currentHealth = maxHealth;
+        // Actualizar la barra por primera vez
+        if (canvasManager != null)
+            canvasManager.UpdateHealthBar(currentHealth, maxHealth);
     }
 
     // Update is called once per frame
@@ -180,6 +194,13 @@ public class PlayerController : MonoBehaviour
             }*/
             FindObjectOfType<ControlJuego>().CheckVictoria();
         }
+
+        // Recibir daño si es una trampa (por ejemplo, un hacha con tag "Hacha")
+        if (other.gameObject.CompareTag("Hacha"))
+        {
+            // Por ejemplo, 10 de daño
+            TakeDamage(10f);
+        }
     }
     private void OnTriggerStay(Collider other)
     {
@@ -193,6 +214,26 @@ public class PlayerController : MonoBehaviour
     {
         //movimientoVertical.y += gravitySpeed * Time.deltaTime; // es como el impulso del salto.
         //controller.Move(movimientoVertical * Time.deltaTime); // hay dos time delta time porque la aceleracion es metros / por segundos al cuadrado
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        // Actualizar la barra de vida
+        if (canvasManager != null)
+        {
+            canvasManager.UpdateHealthBar(currentHealth, maxHealth);
+            canvasManager.ShowDamageFeedback(); // <-- Overlay + Sonido de dolor
+        }
+
+        // Si la vida llegó a 0, Game Over
+        if (currentHealth <= 0)
+        {
+            Debug.Log("Game Over!");
+            // Aquí podrías desactivar controles del jugador, mostrar panel de GameOver, etc.
+        }
     }
     public void StopFootsteps()
     {

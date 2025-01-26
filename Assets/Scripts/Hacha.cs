@@ -13,6 +13,7 @@ public class Hacha : MonoBehaviour
     [Header("Dirección")]
     [SerializeField] private bool invertDirection = false;
 
+
     private bool activar; // Controla si la trampa se mueve
     private float initialRotationX;   // Guardará la rotación inicial en X
 
@@ -70,6 +71,21 @@ public class Hacha : MonoBehaviour
         // Importante desuscribirse para evitar errores
         gM.OnAreaEntrada -= Activar;
         gM.OnAreaSalida -= Desactivar;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Cuando el Player entre en el trigger del hacha
+        if (activar && other.CompareTag("Player"))
+        {
+
+            // Buscamos su PlayerController para llamar a TakeDamage
+            PlayerController playerController = other.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.TakeDamage(10);
+            }
+        }
     }
 }
 
