@@ -29,6 +29,7 @@ public class Boton : MonoBehaviour
     public void Interactuar()
     {
         opening = true;
+        // Notificamos al GameManagerSO el ID de este botón
         gM.InteractuableEjecutado(id);
     }
 }

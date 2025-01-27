@@ -118,6 +118,13 @@ public class PlayerController : MonoBehaviour
                     // interactua con el botón
                     boton.Interactuar();
                 }
+
+                // si impacto en el botón
+                if (hit.transform.TryGetComponent(out BotonCombinacion botonCombinacion))
+                {
+                    // interactua con el botón de secuencia
+                    botonCombinacion.Interactuar();
+                }
             }
         }
 
