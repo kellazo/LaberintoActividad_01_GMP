@@ -124,7 +124,7 @@ MonoBehaviour:
   audioSource: {fileID: 2500040794719491585}
   correctClip: {fileID: 8300000, guid: 253e885c3533c2a41916cb5e9df88133, type: 3}
   errorClip: {fileID: 8300000, guid: 261a2e7072a91844996e69a23461c910, type: 3}
-  id: 10
+  id: 1
   velocity: 3
   destination: {fileID: 494407912787570212}
 --- !u!82 &2500040794719491585
@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gM: {fileID: 11400000, guid: 69d759c82f09b1142bd9382f7b76a456, type: 2}
-  sequence: 09000000080000000a000000
+  sequence: 010000000200000003000000
   botones:
   - {fileID: 5445974560003808830}
   - {fileID: 2074609617939817880}
@@ -607,7 +607,7 @@ MonoBehaviour:
   audioSource: {fileID: 8806669182353579295}
   correctClip: {fileID: 8300000, guid: 253e885c3533c2a41916cb5e9df88133, type: 3}
   errorClip: {fileID: 8300000, guid: 261a2e7072a91844996e69a23461c910, type: 3}
-  id: 8
+  id: 3
   velocity: 3
   destination: {fileID: 4765513374894294036}
 --- !u!82 &8806669182353579295
@@ -862,7 +862,7 @@ MonoBehaviour:
   audioSource: {fileID: 8522183480886957257}
   correctClip: {fileID: 8300000, guid: 253e885c3533c2a41916cb5e9df88133, type: 3}
   errorClip: {fileID: 8300000, guid: 261a2e7072a91844996e69a23461c910, type: 3}
-  id: 9
+  id: 2
   velocity: 3
   destination: {fileID: 6189526417270347090}
 --- !u!82 &8522183480886957257

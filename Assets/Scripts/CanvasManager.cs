@@ -9,7 +9,7 @@ public class CanvasManager : MonoBehaviour
     [Header("Vida del Player")]
     [SerializeField]
     private Image healthBar;
-    [SerializeField] private float maxLife = 100f;
+    //[SerializeField] private float maxLife = 100f;
 
     //Encapsular para que des de otro script se pueda acceder
     public Image HealthBar { get => healthBar; }
@@ -26,6 +26,9 @@ public class CanvasManager : MonoBehaviour
     [Header("Sonido de daño")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip hurtClip;
+
+    [Header("Hint UI")]
+    [SerializeField] private TextMeshProUGUI hintText;
 
 
 
@@ -70,12 +73,34 @@ public class CanvasManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (hintText != null)
+        {
+            hintText.gameObject.SetActive(false); // Oculto al inicio
+        }
+           
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    // Muestra el texto de hint (ej: "Pulsa E...").
+    public void ShowHint(string message)
+    {
+        if (hintText != null)
+        {
+            hintText.text = message;
+            hintText.gameObject.SetActive(true);
+        }
+    }
+    // Oculta el texto de hint.
+    public void HideHint()
+    {
+        if (hintText != null)
+        {
+            hintText.gameObject.SetActive(false);
+        }
     }
 }

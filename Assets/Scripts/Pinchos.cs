@@ -8,7 +8,7 @@ public class Pinchos : MonoBehaviour
     [SerializeField] private GameManagerSO gM; //manegador de eventos
     [SerializeField] private int id;
     [SerializeField] private float velocity;
-    private float yDirection = 1;
+    //private float yDirection = 1;
     private bool activar; // Controla si la trampa se mueve
 
     public float speed = 2f;           // Velocidad de movimiento

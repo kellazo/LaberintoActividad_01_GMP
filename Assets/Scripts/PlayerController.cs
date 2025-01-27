@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
+using TMPro;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -62,7 +63,9 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
         // Actualizar la barra por primera vez
         if (canvasManager != null)
+        {
             canvasManager.UpdateHealthBar(currentHealth, maxHealth);
+        }
     }
 
     // Update is called once per frame
@@ -118,18 +121,15 @@ public class PlayerController : MonoBehaviour
                     // interactua con el botón
                     boton.Interactuar();
                 }
-
-                // si impacto en el botón
-                if (hit.transform.TryGetComponent(out BotonCombinacion botonCombinacion))
+                else if (hit.transform.TryGetComponent(out BotonCombinacion botonCombinacion))
                 {
                     // interactua con el botón de secuencia
                     botonCombinacion.Interactuar();
                 }
             }
         }
-
-
-
+       
+    
         if (controller.isGrounded)
         {
             velocidadVertical = 0f;
@@ -208,6 +208,7 @@ public class PlayerController : MonoBehaviour
             // Por ejemplo, 10 de daño
             TakeDamage(10f);
         }
+        
     }
     private void OnTriggerStay(Collider other)
     {

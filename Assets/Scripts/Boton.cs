@@ -9,11 +9,17 @@ public class Boton : MonoBehaviour
     [SerializeField] private float velocity;
     [SerializeField] private Transform destination;
 
+    [Header("Audios")]
+    [SerializeField] private AudioSource audioSource;   // SU propio AudioSource
+    [SerializeField] private AudioClip Clip;     // Sonido
+ 
     private bool opening = false;
+    private Vector3 originalPosition;
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Guardamos la posición inicial para poder restaurarla
+        originalPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -23,13 +29,23 @@ public class Boton : MonoBehaviour
         {
             //CINEMATICO: Sin fisicas
             transform.position = Vector3.MoveTowards(transform.position, destination.position, velocity * Time.deltaTime);
+
+            
         }
+
     }
 
     public void Interactuar()
     {
         opening = true;
+        if (audioSource != null && Clip != null)
+        {
+            audioSource.PlayOneShot(Clip);
+        }
         // Notificamos al GameManagerSO el ID de este botón
-        gM.InteractuableEjecutado(id);
+        gM.InteractuableEjecutadoSolo(id);
+
     }
+
+
 }
