@@ -24,7 +24,7 @@ public class ZonaTrampa : MonoBehaviour
     {
         if (other.transform.TryGetComponent(out PlayerController player))
         {
-            SalirEstado();
+            //SalirEstado();
         }
     }
 
