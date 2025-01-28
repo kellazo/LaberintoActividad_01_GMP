@@ -1,13 +1,13 @@
-# LaberintoActividad01GMP
+# LaberintoActividad02GMP
  UNIR GDDV 2 - Motores I - Actividad 01 Laberinto
 itchi.io
-https://guiguimup.itch.io/actividad01gmp
+https://guiguimup.itch.io/actividad02gmp
 
  English
 
 This game was developed by Guillem Muñoz Pueyo, a student at the International University of La Rioja, and its purpose is purely educational.
 
-It is part of the first activity in the "Engines 1" course of the Video Game Design and Development degree, taught by Professor Fernando Madrid.
+It is part of the second activity in the "Engines 1" course of the Video Game Design and Development degree, taught by Professor Fernando Madrid.
 
 Controls:
 
