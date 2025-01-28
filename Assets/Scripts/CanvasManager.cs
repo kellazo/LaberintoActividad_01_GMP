@@ -30,7 +30,18 @@ public class CanvasManager : MonoBehaviour
     [Header("Hint UI")]
     [SerializeField] private TextMeshProUGUI hintText;
 
+    [SerializeField] private GameObject gameOverPanel; // Panel que muestra "Game Over"
 
+    private void Start()
+    {
+        // Asegúrate de que el panel esté oculto al inicio
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+        if (hintText != null)
+        {
+            hintText.gameObject.SetActive(false); // Oculto al inicio
+        }
+    }
 
     public void UpdateHealthBar(float currentLife, float maxLife)
     {
@@ -70,16 +81,6 @@ public class CanvasManager : MonoBehaviour
         damageOverlay.color = c;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (hintText != null)
-        {
-            hintText.gameObject.SetActive(false); // Oculto al inicio
-        }
-           
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -102,5 +103,10 @@ public class CanvasManager : MonoBehaviour
         {
             hintText.gameObject.SetActive(false);
         }
+    }
+    public void ShowGameOverScreen()
+    {
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
     }
 }

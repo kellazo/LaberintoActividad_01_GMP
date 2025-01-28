@@ -84,7 +84,7 @@ public class Pinchos : MonoBehaviour
         gM.OnAreaEntrada -= Activar;
         gM.OnAreaSalida -= Desactivar;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         // Cuando el Player entre en el trigger
         if (activar && other.CompareTag("Player"))
@@ -98,6 +98,7 @@ public class Pinchos : MonoBehaviour
             }
         }
     }
+   
 
 }
 
