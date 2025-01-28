@@ -4,7 +4,7 @@ using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
+
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
