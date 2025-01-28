@@ -12,7 +12,7 @@ public class Boton : MonoBehaviour
     [Header("Audios")]
     [SerializeField] private AudioSource audioSource;   // SU propio AudioSource
     [SerializeField] private AudioClip Clip;     // Sonido
- 
+    [SerializeField] private CanvasManager canvasManager;
     private bool opening = false;
     private Vector3 originalPosition;
     // Start is called before the first frame update
@@ -30,7 +30,6 @@ public class Boton : MonoBehaviour
             //CINEMATICO: Sin fisicas
             transform.position = Vector3.MoveTowards(transform.position, destination.position, velocity * Time.deltaTime);
 
-            
         }
 
     }

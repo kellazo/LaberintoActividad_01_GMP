@@ -31,6 +31,7 @@ public class PuertaSecuencia : MonoBehaviour
     private bool abrir = false;
     private float movedDistance = 0f;
     private Vector3 initialPosition;
+    private bool puzzleCompletado = false;
 
     private void OnEnable()
     {
@@ -76,6 +77,8 @@ public class PuertaSecuencia : MonoBehaviour
     // en la secuencia. Si se completa la secuencia, abrimos la puerta.
     private void BotonPulsado(int botonID)
     {
+        if (puzzleCompletado)
+            return;
         // Si el ID coincide con el que esperamos
         if (botonID == sequence[currentSequenceIndex])
         {
@@ -101,6 +104,7 @@ public class PuertaSecuencia : MonoBehaviour
             {
                 // Abrir la puerta
                 abrir = true;
+                
                 movedDistance = 0f; // reiniciamos para mover la puerta
 
                 // Reproducir sonido de puerta abriéndose
@@ -110,13 +114,14 @@ public class PuertaSecuencia : MonoBehaviour
                 }
 
                 Debug.Log("Secuencia completada. Puerta abriéndose...");
+                puzzleCompletado = true;
             }
         }
         else
         {
             // Orden incorrecto: Reiniciamos índice
             currentSequenceIndex = 0;
-                
+            puzzleCompletado = false;
             Debug.Log("Orden incorrecto. Secuencia reiniciada.");
 
             // A todos los botones:

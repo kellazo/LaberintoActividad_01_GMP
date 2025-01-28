@@ -83,11 +83,11 @@ public class PlayerController : MonoBehaviour
         // movimiento de un cuerpo de forma cinemática (sin fisicas)
 
         // getAxis tiene un impulso hasta llegar a 1 o -1 y GetAxisRaw es el absoluto.
-        //float hInput = Input.GetAxisRaw("Horizontal"); // A/D o Flechas Izq/Der  -1, 0, 1
+        float hInput = Input.GetAxisRaw("Horizontal"); // A/D o Flechas Izq/Der  -1, 0, 1
         float vInput = Input.GetAxisRaw("Vertical");     // W/S o Flechas Arriba/Abajo -1, 0 , 1
 
         // Usamos Time.deltaTime para que la rotación no dependa del framerate. Y rotamos al personaje en el eje Y
-       // transform.Rotate(0, hInput * rotateSpeed * Time.deltaTime, 0);
+        transform.Rotate(0, hInput * rotateSpeed * Time.deltaTime, 0);
 
         // Creamos un vector de movimiento local: hacia adelante lo que indica "vertical" y normalizamos (vector unitario) para que la diagonal entre "dentro del círculo"
         //Vector3 moveDirection = new Vector3(hInput, 0, vInput).normalized;
@@ -195,6 +195,14 @@ public class PlayerController : MonoBehaviour
         if (isGameOver && Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.LoadScene("MainMenu");
+            Cursor.lockState = CursorLockMode.None;
+            var allAudioSources = FindObjectsOfType<AudioSource>();
+            foreach (var src in allAudioSources)
+            {
+                src.enabled = true;
+            }
+
+
         }
     }
     private void OnTriggerEnter(Collider other)
