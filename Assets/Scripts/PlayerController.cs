@@ -4,6 +4,7 @@ using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 
 [RequireComponent(typeof(CharacterController))]
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip pickUpClip;
     [Tooltip("Distancia detección del raycast hit")]
     [SerializeField] private float distanciaDeteccionInteractuable;
+    [SerializeField] private float distanciaDeteccionSuelo;
     private float velocidadVertical;
     private bool isGameOver = false;
 
@@ -54,14 +56,58 @@ public class PlayerController : MonoBehaviour
     // Referencia al CharacterController
     private CharacterController controller;
 
+    private PlayerInput input;
+
+    private Vector2 inputMovement;
+
+
+    private void Awake()
+    {
+        input = GetComponent<PlayerInput>();
+    }
+
+    private void OnEnable()
+    {
+        input.actions["Jump"].started += Jump;
+        input.actions["Movement"].performed += UpdateMovement;
+        input.actions["Movement"].canceled += CancelMovement;
+    }
+
+    private void CancelMovement(InputAction.CallbackContext ctx)
+    {
+        inputMovement = Vector2.zero;
+    }
+
+    private void UpdateMovement(InputAction.CallbackContext ctx)
+    {
+        inputMovement = ctx.ReadValue<Vector2>();
+    }
+
+    private void OnDisable()
+    {
+        input.actions["Jump"].started -= Jump;
+        input.actions["Movement"].performed -= UpdateMovement;
+        input.actions["Movement"].canceled -= CancelMovement;
+    }
+
+    private void Jump(InputAction.CallbackContext obj)
+    {
+        //if (Physics.Raycast(this.transform.position, transform., distanciaDeteccionSuelo))
+        if (Physics.Raycast(transform.position, Vector3.down, distanciaDeteccionSuelo))
+        {
+            Debug.DrawRay(transform.position, Vector3.down * distanciaDeteccionSuelo, Color.red, 3);
+            //rb.AddForce(Vector3.up.normalized * fuerzaSalto, ForceMode.Impulse);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        
         // Obtenemos el componente CharacterController del mismo GameObject
         controller = GetComponent<CharacterController>();
         // Opcional: Para bloquear el cursor en pantalla
-         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         // Inicializar el texto
         //UpdateCubesText();
         // Asegurarnos que el texto de victoria esté vacío o desactivado al inicio
@@ -87,7 +133,7 @@ public class PlayerController : MonoBehaviour
         float vInput = Input.GetAxisRaw("Vertical");     // W/S o Flechas Arriba/Abajo -1, 0 , 1
 
         // Usamos Time.deltaTime para que la rotación no dependa del framerate. Y rotamos al personaje en el eje Y
-        transform.Rotate(0, hInput * rotateSpeed * Time.deltaTime, 0);
+       // transform.Rotate(0, hInput * rotateSpeed * Time.deltaTime, 0);
 
         // Creamos un vector de movimiento local: hacia adelante lo que indica "vertical" y normalizamos (vector unitario) para que la diagonal entre "dentro del círculo"
         //Vector3 moveDirection = new Vector3(hInput, 0, vInput).normalized;
@@ -166,6 +212,7 @@ public class PlayerController : MonoBehaviour
         // ROTACIÓN CON EL RATÓN EN EJE Y(horizontal)
         float mouseX = Input.GetAxis("Mouse X");        // Movimiento horizontal del ratón
         float yaw = mouseX * mouseSensitivity * Time.deltaTime;
+        //transform.Rotate(0, hInput * rotateSpeed * Time.deltaTime, 0);
         transform.Rotate(Vector3.up, yaw);
 
         if (vInput != 0 && footstepSource.isPlaying == false)
@@ -239,7 +286,7 @@ public class PlayerController : MonoBehaviour
             // Por ejemplo, 10 de daño
             TakeDamage(10f);
         }
-        
+
     }
     private void OnTriggerStay(Collider other)
     {
@@ -316,11 +363,11 @@ public class PlayerController : MonoBehaviour
         //AudioListener.pause = true;
 
         var allAudioSources = FindObjectsOfType<AudioSource>();
-         foreach (var src in allAudioSources)
-         {
+        foreach (var src in allAudioSources)
+        {
             if (src != gameOverAudioSource)
-                src.enabled = false; 
-         }
+                src.enabled = false;
+        }
 
 
     }
